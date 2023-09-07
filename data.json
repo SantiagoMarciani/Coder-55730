@@ -1,0 +1,30 @@
+[
+    {
+        "id": 1,
+        "categoria": "Herramientas",
+        "nombre": "Taladro a bateria (no incluida)",
+        "precio": 10650,
+        "stock": 5
+    },
+    {
+        "id": 2,
+        "categoria": "Herramientas",
+        "nombre": "Amoladora a bateria (no incluida)",
+        "precio": 9560,
+        "stock": 7
+    },
+    {
+        "id": 3,
+        "categoria": "Herramientas",
+        "nombre": "Bateria",
+        "precio": 3415,
+        "stock": 20
+    },
+    {
+        "id": 4,
+        "categoria": "Herramientas",
+        "nombre": "Sierra circular a bateria (no incluida)",
+        "precio": 11980,
+        "stock": 10
+    }
+]
