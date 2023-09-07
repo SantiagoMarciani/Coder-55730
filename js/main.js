@@ -62,7 +62,7 @@ function MostrarPromociones() {
         const option = document.createElement('option');
         option.text = planes[item].plan;
         option.value = planes[item].codigo;
-        option.onclick = actualizarCarrito;
+        option.onclick = actualizarCarritoPromociones;
 
         select.add(option);
 
@@ -73,6 +73,17 @@ function MostrarPromociones() {
     contenedor.appendChild(select);
 }
 
+function actualizarCarritoPromociones() {
+    actualizarCarrito();
+    swal.fire({
+        html: "<small>El plan de pago fue actualizado</small><hr>",
+        type:'success',
+        icon: 'success',
+        title: 'Actualización carrito',
+        showConfirmButton: false,
+        timer: 1500    
+    })
+}
 function actualizarCarrito() {
     carritoLista.innerHTML = '';
 
