@@ -18,8 +18,8 @@ function CargarProductos() {
     const contenedor = document.getElementById('listaProductos');
 
     $.ajax({
-        url:'data.json',
-        type: 'POST',
+        url:'./data.json',
+        type: 'GET',
         data: {},
         
         success: function(data){
