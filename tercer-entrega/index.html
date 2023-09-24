@@ -5,69 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Carrito de compra</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="https://kit.fontawesome.com/9e2b64dd54.js" crossorigin="anonymous"></script>
-
 </head>
 
 <body onload="IniciarCompra()">
     
     <div class="container">
-        <div class="row mt-3" >
-            <div class="col-3">
-                <img src="./img/logo.png" alt="nuestro logo" style="height: 50px;">
-            </div>
-            <div class="col-9 text-right">
-                <h1>TIENDA VIRTUAL</h1>
-
-            </div>
-        </div>
+        <h1>TIENDA VIRTUAL</h1>
         <hr>
         Bienvenido <span id="nombre"></span> a la tienda virtual, aca tenes los productos disponibles.
         <ul class="list-group mt-4" id="listaProductos">
             <!-- Aquí se agregarán los productos dinámicamente -->
         </ul>
-
-        <div id="productos"></div>
-
         <hr>
-        <div class="row">
-            <div class="col-6">
-                <div class="text-center">
-                    <button type="button" class="btn btn-primary mt-3" data-toggle="modal" data-target="#carritoModal">
-                        <div id="divcarrito">Ver Carrito</div> 
-                    </button>
-                    <button type="button" class="btn btn-success mt-3" data-toggle="modal" onclick="FinalizarCompra()">
-                        Finalziar compra
-                    </button>
-                </div>
-                <hr>
-                <div id="divpromociones-op"></div>
-            </div>
-            <div class="col-6">            
-                
-                <h6 class="text-primary semi-bold">Su compra</h6>
-                <table class="col-12">
-                    <tr>
-                        <td>Subtotal compra:</td>
-                        <td style="text-align: right">$  <span id="totalPagar">0.00</span></td>
-                    </tr>
-                    <tr>
-                        <td>Financiación:</td>
-                        <td style="text-align: right"><div id="divpromociones"></div></td>
-                    </tr>
-                    <tr>
-                        <td>Valor de cada cuota:</td>
-                        <td style="text-align: right"> <span id="valorcuota">0.00</span></td>
-                    </tr>
-                    <tr>
-                        <td>Total compra:</td>
-                        <td style="text-align: right">$ <span id="totalPagarCuotas">0.00</span></td>
-                    </tr>
-
-                </table>
-            </div>
-        </div>
-    
+        <div id="divpromociones"></div>
+        <p></p>
+        <div id="divpromociones-op"></div>
+        
+        <button type="button" class="btn btn-primary mt-3" data-toggle="modal" data-target="#carritoModal">
+            <div id="divcarrito">Ver Carrito</div> 
+        </button>
+        <button type="button" class="btn btn-success mt-3" data-toggle="modal" onclick="FinalizarCompra()">
+            Finalziar compra
+        </button>
 
         <!-- Modal para mostrar el carrito -->
         <div class="modal fade" id="carritoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -83,6 +42,9 @@
                         <ul id="carritoLista">
                             <!-- Aquí se mostrarán los productos del carrito -->
                         </ul>
+                        <hr>
+                        <p>Total a Pagar: $ <span id="totalPagar">0.00</span></p>
+                        <p>Total a Pagar en cuotas: $ <span id="totalPagarCuotas">0.00</span></p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -90,10 +52,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="footer">
-            <hr>
-            <div class="col-12 mb-5 text-center"><h6 class="text-primary semi-bold"><b>Marciani Santiago </b>- Entrega final trabajo comisión #55730</h6></div>
         </div>
     </div>
 

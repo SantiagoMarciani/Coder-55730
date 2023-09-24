@@ -1,0 +1,38 @@
+[
+    {
+        "id": 1,
+        "categoria": "Herramientas",
+        "nombre": "Taladro a bateria (no incluida)",
+        "detalle": "Taladro percutor + Atornillador 13mm ION sin bateria ni cargador",
+        "precio": 10650,
+        "stock": 5,
+        "imagen": "./img/taladro.jpg"
+    },
+    {
+        "id": 2,
+        "categoria": "Herramientas",
+        "nombre": "Amoladora a bateria (no incluida)",
+        "detalle": "Amoladora angular 4.5` ION sin cargador ni bateria.",
+        "precio": 9560,
+        "stock": 7,
+        "imagen": "./img/amoladora.jpg"
+    },
+    {
+        "id": 3,
+        "categoria": "Herramientas",
+        "nombre": "Bateria",
+        "detalle": "Bateria 2000mH para herramientas ION-LITIO",
+        "precio": 3415,
+        "stock": 20,
+        "imagen": "./img/bateria.jpg"
+    },
+    {
+        "id": 4,
+        "categoria": "Herramientas",
+        "nombre": "Sierra circular a bateria (no incluida)",
+        "detalle": "Sierra circular 9-1/4` (235mm) guia laser CS20A",
+        "precio": 11980,
+        "stock": 10,
+        "imagen": "./img/sierra.jpg"
+    }
+]

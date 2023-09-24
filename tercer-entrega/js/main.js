@@ -14,76 +14,36 @@ const planes = [
 CargarProductos();
 MostrarPromociones();
 
-function obtenerDatos() {
-    return new Promise((resolve, reject) => {
-        $.ajax({
-            url: './json/data.json',
-            type: 'GET',
-            data: {},
-            success: function (data) {
-                resolve(data);
-            },
-            error: function (error) {
-                reject(error);
-            }
-        });
-    });
-}
-
-
 function CargarProductos() {
-    const productosDiv = document.getElementById("productos");
+    const contenedor = document.getElementById('listaProductos');
 
-    obtenerDatos() 
-        .then(data => {
-            console.log(data);
-            console.log(data.length);
-            for (let i = 0; i < data.length; i++) {
-                const productoDiv = document.createElement("div");
-                productoDiv.innerHTML = "<h2>"+data[i].nombre+"</h2>";
-                productoDiv.innerHTML = `
-                <div class="card col-12 mb-2" >
-                    
-                    <div class="row">
-                        <div class="card-body col-2">
-                            <img src=`+data[i].imagen+` style="width: 100px;" alt=`+data[i].nombre+` class="card-img-top mx-auto">
-                        </div>
-                        <div class="card-body col-6">
-                            <h5 class="text-primary semi-bold">`+data[i].nombre+`</h5>
-                            <h6 class="">`+data[i].detalle+`</h6>
-                            <h6 class=""><small>Categoria: `+data[i].categoria+`</small></h6>
-                            <h6 class=""><small>Stock disponible: `+data[i].stock+`</small></h6>
-                        </div>
-                        <div class="card-body col-2">
-                            <h5 class="text-primary semi-bold">$ `+data[i].precio.toFixed(2)+`</h5>
-                            </div>
-                            <div class="card-body col-2">
-                                <button type="button" class="btn btn-primary col-12" onclick="agregaralcarrito(this);" 
-                                data-producto='{"id": `+data[i].id+`, "nombre": "`+data[i].nombre+`", "precio": `+data[i].precio+`}'><i class="fa-solid fa-cart-plus"></i> &nbsp; Agregar
-                                </button>
-                            </div>
-            
-                        </div>                        
-                    </div>
-                </div>
-                `;
-                productosDiv.appendChild(productoDiv);
+    $.ajax({
+        url:'./json/data.json',
+        type: 'GET',
+        data: {},
+        
+        success: function(data){
+            for(let i=0; i<data.length; i++) {
+                console.log(data[i].nombre);
+
+                const listItem = document.createElement('li');
+                listItem.className = 'list-group-item';
+
+                const addButton = document.createElement('button');
+                
+                listItem.innerText = data[i].nombre + '\n Precio por unidad: $ ' + data[i].precio.toFixed(2);
+                listItem.appendChild(addButton);
+                
+                addButton.className = 'btn btn-primary btn-sm float-right';
+                addButton.innerText = ' Agregar al carrito ';
+                addButton.addEventListener('click', function() {
+                    carrito.push(data[i]);
+                    actualizarCarrito();
+                });
+                contenedor.appendChild(listItem);
             }
-        })
-        .catch(error => {
-            console.log("Error cargando los datos: "+error);
-        });
-}
-
-function agregaralcarrito(btn) {
-    const dataProducto = btn.getAttribute('data-producto');
-
-    // Convertir la cadena JSON en un objeto JavaScript
-    const producto = JSON.parse(dataProducto);
-
-    console.log("agregado codigo: "+producto.id+producto.nombre);
-    carrito.push(producto);
-    actualizarCarrito()
+        }
+    });
 }
 
 function MostrarPromociones() {
@@ -97,7 +57,6 @@ function MostrarPromociones() {
     const select = document.createElement('select');
     select.id = "planfinanciacion";
     select.className = 'form-control form-control-sm';
-    select.style = "text-align: right;";
 
     for(let item=0; item<planes.length; item++ ) {
         const option = document.createElement('option');
@@ -137,7 +96,6 @@ function actualizarCarrito() {
 
         const carritoItem = document.createElement('li');
         carritoItem.className = 'list-group-item';
-        carritoItem.style = 'padding-bottom: 30px; vertical-align: middle';
         carritoItem.innerText = producto.nombre + '\n Precio: ' + producto.precio.toFixed(2);
 
         const deleteButton = document.createElement('button');
@@ -154,12 +112,8 @@ function actualizarCarrito() {
         carritoLista.appendChild(carritoItem);
     });
 
-    const totalcuotastemp = SimularCuotas(cuotas, totalPagar);
-
     totalPagarElement.innerText = totalPagar.toFixed(2);
-    totalPagarCuotas.innerText = totalcuotastemp;
-
-    valorcuota.innerText = (cuotas>0 ? planes[cuotas].cuotas+" cuotas de $ "+(totalcuotastemp / planes[cuotas].cuotas).toFixed(2) : "Compra sin cuotas");
+    totalPagarCuotas.innerText = SimularCuotas(cuotas, totalPagar);
 
     localStorage.setItem('carrito', JSON.stringify(carrito));
 
@@ -184,7 +138,7 @@ function SimularCuotas(plan, total) {
     
     totalventa = total*planes[coeficiente].coeficiente;
     cuotasde = (totalventa/planes[cuotas].cuotas).toFixed(2);
-    return totalventa.toFixed(2) ;
+    return totalventa.toFixed(2) + ' (' + planes[cuotas].cuotas + ' cuota/s de $ ' + cuotasde + ')';
 }
 
 function IniciarCompra() {
