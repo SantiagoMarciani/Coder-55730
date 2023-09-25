@@ -209,20 +209,52 @@ function IniciarCompra() {
 }
 
 function FinalizarCompra() {
-    swal.fire({
-        html: "<small>Muchas gracias por su compra</small><hr>",
-        type:'success',
-        icon: 'success',
-        title: 'Finalizando compra',
-        showConfirmButton: false,
-        timer: 3500    
-    })
+    if (carrito.length > 0) {
+        swal.fire({
+            html: "<small>Muchas gracias por su compra</small><hr>",
+            type:'success',
+            icon: 'success',
+            title: 'Finalizando compra',
+            showConfirmButton: false,
+            timer: 3500    
+        }).then(function() {
+            swal.close();
+            const contenedor = document.getElementById("DivContenedor");
+            contenedor.innerHTML = `
+                <div class="card col-12 mb-2" >
+                    <div class="row">
+                        <div class="card-body col-12 text-center">
+                            <i class="fa-brands fa-opencart fa-5x"></i>
+                            <h3>Muchas gracias por su compra</h3>
+                            <hr>
+                            <button type="button" class="btn btn-primary" id="FinalizarCompra" onclick="NuevaCompra()">Realizar otra compra</button>
+                        
+                        </div>                        
+                    </div>
+                </div>
+            `;
+        })
+    } else {
+        swal.fire({
+            html: "<small>No hay productos en su carrito</small><hr>",
+            type:'success',
+            icon: 'error',
+            title: 'Carrito vacio',
+            showConfirmButton: false,
+            timer: 3500    
+        })
+    }
 }
 
-
+function NuevaCompra() {
+    window.location.href = "./";
+    carrito.splice(0);
+    actualizarCarrito();
+}
 
 const carritoGuardado = localStorage.getItem('carrito');
 if (carritoGuardado) {
     carrito = JSON.parse(carritoGuardado);
     actualizarCarrito();
 }
+
